@@ -1,4 +1,5 @@
 <?php
+
 if($_SESSION['status'] == 'guardian')
 {
 	if(!isset($_POST['student_id']))
