@@ -1,4 +1,23 @@
 <?php
+function presence_value($text)
+{
+	if($text == 'present')
+	{
+		return '<td style="color: green;">Obecny</td>';
+	}
+	if($text == 'not_present')
+	{
+		return '<td style="color: red;">Nieobecny</td>';
+	}
+	if($text == 'justified')
+	{
+		return '<td style="color: yellow;">Usprawiedliwiony</td>';
+	}
+	if($text == 'exempt')
+	{
+		return '<td style="color: blue;">Zwolniony</td>';
+	}
+}
 
 if(!isset($_GET['month']))
 {
@@ -76,12 +95,12 @@ echo '
 		}
 		echo '
 		<tr>
-			<td>'.$i.'-'.$month.'-'.$year.'</td>
-			<td>'.@$presence[$year.'-'.$month.'-'.$day.' 08:00:00'].'</td>
-			<td>'.@$presence[$year.'-'.$month.'-'.$day.' 15:00:00'].'</td>
-			<td>'.@$presence[$year.'-'.$month.'-'.$day.' 22:00:00'].'</td>
+			<td>'.$i.'-'.$month.'-'.$year.'</td>';
+			echo presence_value(@$presence[$year.'-'.$month.'-'.$day.' 08:00:00']);
+			echo presence_value(@$presence[$year.'-'.$month.'-'.$day.' 15:00:00']);
+			echo presence_value(@$presence[$year.'-'.$month.'-'.$day.' 20:00:00']);
 
-		</tr>';
+		echo '</tr>';
 	}
 echo'
 </table>
