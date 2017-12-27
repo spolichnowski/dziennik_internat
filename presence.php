@@ -17,6 +17,10 @@ function presence_value($text)
 	{
 		return '<td style="color: blue;">Zwolniony</td>';
 	}
+	else
+	{
+		return '<td></td>';
+	}
 }
 
 if(!isset($_GET['month']))
@@ -92,6 +96,10 @@ echo '
 		else
 		{
 			$day = $i;
+		}
+		if(($GLOBALS['month'] == date("m") && $day > date("d")) || (($day >date("d") && $month==date("m") )|| $GLOBALS['month'] > date("m") || $GLOBALS['year'] > date("Y")))
+		{
+			break;
 		}
 		echo '
 		<tr>

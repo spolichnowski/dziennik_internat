@@ -1,4 +1,13 @@
 <?php
+
+	if(@$_GET['comment']==1)
+	{
+		echo '<div class="alert alert-success alert-dismissible">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> Dodano uwagę
+		</div>';
+	}
+
+
 	if(isset($_GET['student_id']))
 	{
 

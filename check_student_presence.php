@@ -3,14 +3,14 @@ $days = date("t",mktime(1,1,1,$month,1,$year));
 
 function presence_color($a,$day,$hour)
 {
-	if($GLOBALS['month'] == date("m") && $day > date("d"))
+	/*if($GLOBALS['month'] == date("m") && $day > date("d"))
 	{
 		return;
 	}
 	if($day >$GLOBALS['days'] || $GLOBALS['month'] > date("m") || $GLOBALS['year'] > date("Y"))
 	{
 		return;
-	}
+	}*/
 
 	if(empty($a))
 	{
@@ -79,7 +79,7 @@ function presence_color($a,$day,$hour)
 		';
 	}
 }
-
+echo '<a href="make_comment.php?student_id='.$_GET['student_id'].'"><button>Napisz Uwagę</button></a> <br><br>';
 	while ($row = $result->fetch_assoc())
 	{
 		$presence[$row['presence_date']] = $row['status'];

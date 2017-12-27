@@ -1,5 +1,15 @@
 <?php
 	session_start();
+	@$base = new mysqli("localhost", "internat", "internat", "internat");
+	
+	//Policzenie nieprzeczytanych uwag
+	$result = $base->query('SELECT `id_student` FROM `users` WHERE `email` LIKE "'.$_SESSION['email'].'" AND `status` LIKE "parent"');
+	$student = $result->fetch_row();
+	if(isset($student))
+	{
+		$comment_count = $base->query('SELECT * FROM `comments` WHERE `id_student` LIKE "'.$student[0].'" AND `checked` LIKE 0')->num_rows;
+	}
+	//koniec liczenia
 ?>
 
 <!DOCTYPE html>
@@ -40,10 +50,19 @@
 				{
 					echo'
 					<li><a href="userpanel.php?location=presence">Frekwencja</a></li>
-					<li><a href="userpanel.php?location=comments">Uwagi</a></li>
+					<li><a href="userpanel.php?location=comments">Uwagi';
+					if($comment_count != 0)
+					{
+						//Wyświetlenie ilości nieprzeczytanych uwag przy linku "UWAGI"
+						echo '(',$comment_count,')';
+					}					
+					echo'
+					</a></li>
 					<li><a href="userpanel.php?location=personal_data">Dane ucznia</a></li>
 					';
 				}
+				
+				
 			?>
 
                 <li><a href="userpanel.php?location=messages">Wiadomości</a></li>
@@ -67,7 +86,6 @@
 <br><br><br><br>
   <article class="col-md-12 tabela">
 			  <?php
-				@$base = new mysqli("localhost", "internat", "internat", "internat");
 				if(@$base->connect_errno)
 				{
 					die("Błąd połąćzenia z bazą danych ".$base->connect_errno);
