@@ -79,7 +79,7 @@ function presence_color($a,$day,$hour)
 		';
 	}
 }
-echo '<a href="make_comment.php?student_id='.$_GET['student_id'].'"><button>Napisz Uwagę</button></a> <br><br>';
+echo '<a href="userpanel.php?location=make_comment&student_id='.$_GET['student_id'].'"><button>Napisz Uwagę</button></a> <br><br>';
 	while ($row = $result->fetch_assoc())
 	{
 		$presence[$row['presence_date']] = $row['status'];

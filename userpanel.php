@@ -112,6 +112,7 @@
 					if(@$_GET['location'] == "students")include("students.php");
 					if(@$_GET['location'] == "personal_data")include("personal_data.php");
 					if(@$_GET['location'] == "rooms")include("rooms.php");
+					if(@$_GET['location'] == "make_comment")include("make_comment.php");
 				}
 
 			  $base->close();

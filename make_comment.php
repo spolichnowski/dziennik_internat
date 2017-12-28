@@ -1,22 +1,13 @@
 <?php
-session_start();
 if($_SESSION['status']!= 'guardian')
 {
 	session_destroy();
 	header('Location:logowanie.php?error=security');
 }
-
-@$base = new mysqli("localhost", "internat", "internat", "internat");
-				if(@$base->connect_errno)
-				{
-					die("Błąd połąćzenia z bazą danych ".$base->connect_errno);
-				}
-				$base->set_charset("utf8");
-				
 				echo '
 				<form method="post" action="" id="make_comment">
 					<textarea name="comment" form="make_comment" cols="50" rows="10">Wpisz opis uwagi</textarea> <br>
-					<input type="submit"><br>
+					<a><button>Prześlij uwagę</button></a>
 				</form>
 				<a href="userpanel.php?location=students"><button>Anuluj</button></a> <br>
 				';

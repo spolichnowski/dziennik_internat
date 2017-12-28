@@ -17,7 +17,6 @@
 			}
 		}
 	}
-
 	if(@$_GET['comment']==1)
 	{
 		echo '<div class="alert alert-success alert-dismissible">
@@ -25,10 +24,8 @@
 		</div>';
 	}
 
-	else
-	{
 		if(!empty(@$_GET['room_id']) && intval(@$_GET['room_id']>0))
-		{
+		{	
 			$sql_students_list = 'SELECT * FROM `students` WHERE `room` LIKE '.intval(@$_GET['room_id']).';';
 			echo '<h1>Pokój '.intval($_GET['room_id']).'</h1>';
 			echo '
@@ -61,5 +58,4 @@
 			</tr>';
 		}
 		echo '</table>';
-	}
 ?>
