@@ -34,5 +34,9 @@ echo
 		<th>Płeć</th>
 		<td>'.plec($row[4]).'</td>
 	</tr>
+	<tr>
+		<th>Pokój</th>
+		<td>'.$row[5].'</td>
+	</tr>
 </table>';
 ?>

@@ -44,6 +44,7 @@
 				if($_SESSION['status']=='guardian')
 				{
 					echo '<li><a href="userpanel.php?location=check_presence">Sprawdź obecność</a></li>';
+					echo '<li><a href="userpanel.php?location=rooms">Lista pokoi</a></li>';
 					echo '<li><a href="userpanel.php?location=students">Lista uczniów</a></li>';
 				}
 				if($_SESSION['status']=='student')
@@ -66,6 +67,17 @@
 			?>
 
                 <li><a href="userpanel.php?location=messages">Wiadomości</a></li>
+				<?php
+					if($_SESSION['status']=='student')
+					{
+						$result = $base->query('SELECT concat(`first_name`," ",last_name) FROM `users` WHERE `email` LIKE "'.$_SESSION['email'].'"');
+					}
+					else
+					{
+						$result = $base->query('SELECT concat(`first_name`," ",last_name) FROM `guardians` WHERE `email` LIKE "'.$_SESSION['email'].'"');
+					}
+					echo '<li>' , $result->fetch_row()[0], '</li>'
+				?>
                 <li class="border margin"><span><a href="logowanie.php?error=logout">Wyloguj</a></span></li>
             </ol>
           </div>
@@ -99,6 +111,7 @@
 					if(@$_GET['location'] == "comments")include("comments.php");
 					if(@$_GET['location'] == "students")include("students.php");
 					if(@$_GET['location'] == "personal_data")include("personal_data.php");
+					if(@$_GET['location'] == "rooms")include("rooms.php");
 				}
 
 			  $base->close();

@@ -1,4 +1,22 @@
 <?php
+	function change_room($number, $action)
+	{
+		if($action == '+')
+		{
+			return $number+1;
+		}
+		if($action == '-')
+		{
+			if($number==1)
+			{
+				return $number;
+			}
+			else
+			{
+				return $number-1;
+			}
+		}
+	}
 
 	if(@$_GET['comment']==1)
 	{
@@ -7,14 +25,22 @@
 		</div>';
 	}
 
-
-	if(isset($_GET['student_id']))
-	{
-
-	}
 	else
 	{
-		$sql_students_list = 'SELECT * FROM `students`;';
+		if(!empty(@$_GET['room_id']) && intval(@$_GET['room_id']>0))
+		{
+			$sql_students_list = 'SELECT * FROM `students` WHERE `room` LIKE '.intval(@$_GET['room_id']).';';
+			echo '<h1>Pokój '.intval($_GET['room_id']).'</h1>';
+			echo '
+			<a href="userpanel.php?location=students&room_id='.change_room($_GET['room_id'],'-').'"><button>Poprzedni pokój</button></a>
+			<a href="userpanel.php?location=students&room_id='.change_room($_GET['room_id'],'+').'"><button>Następny pokój</button></a>
+			<a href="userpanel.php?location=students"><button>Wszystkie pokoje</button></a>
+			';
+		}
+		else
+		{
+			$sql_students_list = 'SELECT * FROM `students`;';
+		}
 		$result = $base->query($sql_students_list);
 		echo '<table class="table table-bordered table-hover table-margi">';
 
